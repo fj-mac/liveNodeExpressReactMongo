@@ -14,6 +14,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.reloadData();
+  }
+
+  reloadData() {
     fetch("/api/getMessages")
       .then(res => res.json())
       .then(data => {
@@ -22,6 +26,7 @@ class App extends Component {
           comments: data
         });
       });
+
   }
 
   renderComments() {
@@ -37,9 +42,10 @@ class App extends Component {
 
         {this.renderComments()}
 
-        <form action="/api/createMessage">
-          <input type="text" id="comment" />
+        <form action="/api/createMessage" method="POST">
+          <input type="text" name="text" />
         </form>
+
         <h2>Make a change in the world!?</h2>
         <div>
           Made by John with <span role="img" aria-label="heart emoji">♥️</span>

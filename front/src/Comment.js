@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Comment extends Component {
   constructor(props) {
@@ -7,6 +8,8 @@ export default class Comment extends Component {
     this.state = {
       votes: 0
     };
+
+    this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
@@ -19,7 +22,7 @@ export default class Comment extends Component {
     return (
       <div className="Comment">
         <button className="btn btn-info"
-          onClick = {this.onClick.bind(this)}>
+          onClick = {this.onClick}>
           <span role="img" aria-label="vote for this comment">👍</span>
         </button>
         &nbsp;&nbsp;
@@ -30,3 +33,11 @@ export default class Comment extends Component {
     );
   }
 }
+
+Comment.propTypes = {
+  comment: PropTypes.object.isRequired
+};
+
+
+
+
