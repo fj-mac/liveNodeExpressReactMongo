@@ -8,6 +8,10 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+
+    this.myInputText = null;
+
+
     this.state = {
       comments: []
     };
@@ -52,19 +56,19 @@ class App extends Component {
   onCreateComment(event) {
     event.preventDefault();
 
-    if (!this.inText) {
+    if (!this.myInputText) {
       console.log("inText not set not inserting");
       return;
     }
 
     // Post
     console.log("Send the post");
-    this.postData("/api/createMessage", {text:this.inText.value} )
+    this.postData("/api/createMessage", {text:this.myInputText.value} )
       .then((result) => {
         console.log("Inserted the data!!", result);
 
         //clearing the input
-        this.inText.value="";
+        this.myInputText.value="";
         // Redraw
         console.log("Reload data");
         this.reloadData();
@@ -81,12 +85,31 @@ class App extends Component {
       <div className="App">
         <h1>Comments!</h1>
         <div className="row">{this.renderComments()}</div>
+
+        <h2>Create a new comment</h2>
         <form onSubmit={this.onCreateComment.bind(this)}>
-          <input
-            type="text"
-            name="text"
-            ref = { input => this.inText = input}
-          />
+          <div>
+            <label htmlFor="inAuthor"> Author
+              <input
+                id="inAuthor"
+                type="text"
+                name="author"
+              />
+              {/* Remember to add the ref */ }
+            </label>
+          </div>
+          <div>
+            <label htmlFor="inComment"> Comment:
+              <input
+                id="inComment"
+                type="text"
+                name="text"
+                ref = { input => this.myInputText = input}
+              />
+            </label>
+          </div>
+
+          <input type="submit" value="Submit" />
         </form>
 
         <div>
