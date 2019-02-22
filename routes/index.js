@@ -47,7 +47,6 @@ function createComment(c) {
 
 
 router.post('/createMessage', function(req, res, next) {
-
   createComment({
     text:req.body.text
   })
