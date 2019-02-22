@@ -36,22 +36,6 @@ class App extends Component {
     return this.state.comments.map((c, i) => <Comment key={i++} comment={c} />);
   }
 
-  postData(url, data) {
-    // Default options are marked with *
-    return fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      // mode: "cors", // no-cors, cors, *same-origin
-      // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      // credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json"
-        // "Content-Type": "application/x-www-form-urlencoded",
-      },
-      // redirect: "follow", // manual, *follow, error
-      // referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }).then(response => response.json()); // parses response to JSON
-  }
 
   onCreateComment(event) {
     event.preventDefault();
@@ -63,7 +47,13 @@ class App extends Component {
 
     // Post
     console.log("Send the post");
-    this.postData("/api/createMessage", {text:this.myInputText.value} )
+    fetch("/api/createMessage", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({text:this.myInputText.value})
+    }).then(response => response.json())
       .then((result) => {
         console.log("Inserted the data!!", result);
 
@@ -73,8 +63,6 @@ class App extends Component {
         console.log("Reload data");
         this.reloadData();
       });
-
-
 
   }
 

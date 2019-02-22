@@ -28,6 +28,8 @@ export default class Comment extends Component {
         &nbsp;&nbsp;
         <span>{this.state.votes}</span>
         &nbsp;&nbsp;
+        <span>{this.props.comment.author}</span>
+        &nbsp;&nbsp;
         <span>{this.props.comment.text}</span>
       </div>
     );
