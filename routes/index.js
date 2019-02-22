@@ -35,12 +35,14 @@ function getComments(callback) {
 
 }
 
-function createComment(c) {
+function createComment(c, callback) {
   connect(function (comments, client) {
-    comments.insertOne(c, function (err) {
+    comments.insertOne(c, function (err, result) {
       if (err!==null) throw err;
 
       console.log("Inserted!!!");
+
+      callback(result);
     });
   });
 }
@@ -49,8 +51,11 @@ function createComment(c) {
 router.post('/createMessage', function(req, res, next) {
   createComment({
     text:req.body.text
-  })
-  res.redirect("/");
+  }, function (result) {
+
+    console.log("Inserted, sending result");
+    res.send(result);
+  });
 });
 
 router.get('/getMessages', function(req, res, next) {

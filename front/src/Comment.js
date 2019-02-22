@@ -20,7 +20,7 @@ export default class Comment extends Component {
 
   render() {
     return (
-      <div className="Comment">
+      <div className="Comment col-4">
         <button className="btn btn-info"
           onClick = {this.onClick}>
           <span role="img" aria-label="vote for this comment">👍</span>
