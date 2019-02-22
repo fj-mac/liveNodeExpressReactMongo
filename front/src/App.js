@@ -4,6 +4,8 @@ import "./App.css";
 
 import Comment from "./Comment.js";
 
+import MainTemplate from "./MainTemplate.js";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -70,43 +72,39 @@ class App extends Component {
     console.log("Rendering");
 
     return (
-      <div className="App">
-        <h1>Comments!</h1>
-        <div className="row">{this.renderComments()}</div>
+      <MainTemplate>
+        <div className="App">
+          <h1>Comments!</h1>
+          <div className="row">{this.renderComments()}</div>
 
-        <h2>Create a new comment</h2>
-        <form onSubmit={this.onCreateComment.bind(this)}>
-          <div>
-            <label htmlFor="inAuthor"> Author
-              <input
-                id="inAuthor"
-                type="text"
-                name="author"
-              />
-              {/* Remember to add the ref */ }
-            </label>
-          </div>
-          <div>
-            <label htmlFor="inComment"> Comment:
-              <input
-                id="inComment"
-                type="text"
-                name="text"
-                ref = { input => this.myInputText = input}
-              />
-            </label>
-          </div>
+          <h2>Create a new comment</h2>
+          <form onSubmit={this.onCreateComment.bind(this)}>
+            <div>
+              <label htmlFor="inAuthor"> Author
+                <input
+                  id="inAuthor"
+                  type="text"
+                  name="author"
+                />
+                {/* Remember to add the ref */ }
+              </label>
+            </div>
+            <div>
+              <label htmlFor="inComment"> Comment:
+                <input
+                  id="inComment"
+                  type="text"
+                  name="text"
+                  ref = { input => this.myInputText = input}
+                />
+              </label>
+            </div>
 
-          <input type="submit" value="Submit" />
-        </form>
+            <input type="submit" value="Submit" />
+          </form>
 
-        <div>
-          Made by John with{" "}
-          <span role="img" aria-label="heart emoji">
-            ♥️
-          </span>
         </div>
-      </div>
+      </MainTemplate>
     );
   }
 }
