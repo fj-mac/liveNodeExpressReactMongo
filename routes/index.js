@@ -56,6 +56,8 @@ router.post('/createMessage', function(req, res, next) {
     console.log("Inserted, sending result");
     res.send(result);
   });
+
+
 });
 
 router.get('/getMessages', function(req, res, next) {
